@@ -11,5 +11,6 @@ license = {text = "MIT"}
 stnlab = "stnlab.__main__:main"
 stnlab-insertions = "stnlab.insertions:main"
 stnlab-projection = "stnlab.projection:main"
+stnlab-conflicts = "stnlab.conflicts:main"
 [tool.setuptools]
 packages = ["stnlab"]
