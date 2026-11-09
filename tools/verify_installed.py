@@ -31,3 +31,14 @@ for k,c in enumerate(controls):
   out=f'projection-report-{k}-{j}.json';subprocess.run(command+[str(inp),'--output',out],check=True);assert json.load(open(out))==expected
   q=subprocess.run(command+[out,'--verify'],check=True,capture_output=True,text=True);assert json.loads(q.stdout)=={'valid':True,'schema':'stnlab-projection-v1'}
 print(f'Installed projection family: {len(controls)} controls, both CLI entry points, five total site-packages origins, outside checkout')
+
+import stnlab.conflicts
+assert 'site-packages' in stnlab.conflicts.__file__
+controls=json.load(open(sys.argv[7]));commands=[[sys.executable,'-m','stnlab.conflicts'],[sys.argv[8]]]
+for k,c in enumerate(controls):
+ inp=pathlib.Path(f'conflicts-input-{k}.json');inp.write_text(json.dumps(c['input']))
+ expected=stnlab.conflicts.analyze(c['input']);assert stnlab.conflicts.verify(expected)
+ for j,command in enumerate(commands):
+  out=f'conflicts-report-{k}-{j}.json';subprocess.run(command+[str(inp),'--output',out],check=True);assert json.load(open(out))==expected
+  q=subprocess.run(command+[out,'--verify'],check=True,capture_output=True,text=True);assert json.loads(q.stdout)=={'valid':True,'schema':'stnlab-conflicts-v1'}
+print(f'Installed conflicts family: {len(controls)} controls, both CLI entry points, six total site-packages origins, outside checkout')
