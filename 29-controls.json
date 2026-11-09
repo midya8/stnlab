@@ -1,0 +1,294 @@
+[
+  {
+    "name": "A loose edge hides a tighter chain",
+    "note": "C0 allows t2-t0 <= 12. C1 then C2 imply <= 7. The path proves the upper bound; a complete schedule attains it.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          2,
+          12
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          2,
+          1,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Each pair is fine. The cycle is not.",
+    "note": "Three individually satisfiable constraints sum to 0 <= -1. Pairwise opposite-edge checks miss the three-edge global conflict.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          2,
+          0,
+          -5
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Disconnected means free, not impossible",
+    "note": "Two components can translate relative to one another. Every missing directed path gets an anchored ray that grows its time difference without breaking any constraint.",
+    "input": {
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          3,
+          2,
+          -2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Duplicate constraints: remove one at a time",
+    "note": "Both duplicate edges are individually redundant. Deleting both at once would remove the bound. Redundancy is not a simultaneous deletion plan.",
+    "input": {
+      "nodes": 2,
+      "edges": [
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          4
+        ]
+      ]
+    }
+  },
+  {
+    "name": "A zero cycle is allowed",
+    "note": "Zero-weight cycles can force equality. Path ties use lexicographic original edge-index sequences among simple paths, not shortest hop count.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          -2
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "A conflict outside the anchor component",
+    "note": "t0 is isolated. The negative cycle on t1,t2 still makes the whole network impossible. Checking only nodes reachable from t0 is insufficient.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          1,
+          2,
+          -2
+        ],
+        [
+          2,
+          1,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "A negative self-loop",
+    "note": "The single constraint t0-t0 <= -1 is impossible. A nonnegative self-loop, by contrast, is redundant by the empty path.",
+    "input": {
+      "nodes": 1,
+      "edges": [
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Only the anchor",
+    "note": "One time point, no constraints. Its only queried difference is zero; fixing t0=0 just removes a shared translation.",
+    "input": {
+      "nodes": 1,
+      "edges": []
+    }
+  },
+  {
+    "name": "Six free time points",
+    "note": "All off-diagonal upper bounds are unbounded, with explicit translation rays. Every diagonal is exactly zero.",
+    "input": {
+      "nodes": 6,
+      "edges": []
+    }
+  },
+  {
+    "name": "Twelve edges, negative values, no negative cycle",
+    "note": "A six-node directed ring and its reverse bound all relative times. Negative edge weights are allowed; only negative total cycles are inconsistent.",
+    "input": {
+      "nodes": 6,
+      "edges": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          -2
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          3,
+          4,
+          -1
+        ],
+        [
+          4,
+          5,
+          2
+        ],
+        [
+          5,
+          0,
+          3
+        ],
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          3,
+          2,
+          -2
+        ],
+        [
+          4,
+          3,
+          2
+        ],
+        [
+          5,
+          4,
+          0
+        ],
+        [
+          0,
+          5,
+          -1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "The implied bound can exceed every input weight",
+    "note": "Five weights of 20 imply t5-t0 \u2264 100. The reverse direction is unbounded. Input bounds do not cap inferred bounds or witness times.",
+    "input": {
+      "nodes": 6,
+      "edges": [
+        [
+          0,
+          1,
+          20
+        ],
+        [
+          1,
+          2,
+          20
+        ],
+        [
+          2,
+          3,
+          20
+        ],
+        [
+          3,
+          4,
+          20
+        ],
+        [
+          4,
+          5,
+          20
+        ]
+      ]
+    }
+  }
+]
