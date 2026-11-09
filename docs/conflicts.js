@@ -1,0 +1,13 @@
+import {validate as baseValidate} from './engine.js';
+const lex=(a,b)=>{for(let i=0;i<Math.min(a.length,b.length);i++){if(a[i]!==b[i])return a[i]-b[i]}return a.length-b.length};
+function enumerate(n,edges){const d=Array.from({length:n},(_,u)=>Array.from({length:n},(_,v)=>u===v?0:null)),paths=Array.from({length:n},(_,u)=>Array.from({length:n},(_,v)=>u===v?[]:null)),cycles=[];
+ for(let start=0;start<n;start++){const walk=(at,seen,ids,total)=>{for(let k=0;k<edges.length;k++){const [u,v,w]=edges[k];if(u!==at)continue;const next=[...ids,k],weight=total+w;if(v===start){if(weight<0){const variants=next.map((_,i)=>[...next.slice(i),...next.slice(0,i)]).sort(lex);cycles.push(variants[0])}}else if(!seen.has(v)){if(d[start][v]===null||weight<d[start][v]||weight===d[start][v]&&lex(next,paths[start][v])<0){d[start][v]=weight;paths[start][v]=next}walk(v,new Set([...seen,v]),next,weight)}}};walk(start,new Set([start]),[],0)}
+ cycles.sort(lex);return {d,paths,cycle:cycles[0]||null,cycles:[...new Map(cycles.map(c=>[c.join(","),c])).values()]}}
+function schedule(n,edges){const {d}=enumerate(n,edges),p=Array.from({length:n},(_,v)=>Math.min(0,...d.map(r=>r[v]).filter(v=>v!==null)));return p.map(x=>x-p[0])}
+
+export const validate=baseValidate;
+export function analyze(raw){const input=validate(raw),{nodes:n,edges:es}=input,m=es.length,full=(1<<m)-1,ids=x=>Array.from({length:m},(_,i)=>i).filter(i=>x&(1<<i)),subset=x=>ids(x).map(i=>es[i]),all=enumerate(n,es).cycles,bad=all.map(c=>c.reduce((s,i)=>s|(1<<i),0)),feasible=Array.from({length:full+1},(_,x)=>!bad.some(b=>(x&b)===b)),cores=[],repairMasks=[];
+for(let x=0;x<=full;x++){if(!feasible[x]&&ids(x).every(i=>feasible[x^(1<<i)]))cores.push(x);if(feasible[full^x]&&ids(x).every(i=>!feasible[(full^x)|(1<<i)]))repairMasks.push(x)}
+const cycle=x=>{const row=all.find((c,i)=>(bad[i]&x)===bad[i]);return {edges:row,weight:row.reduce((s,i)=>s+es[i][2],0)}};
+const conflicts=cores.map(x=>({edges:ids(x),cycle:cycle(x),deletions:ids(x).map(edge=>({edge,schedule:schedule(n,subset(x^(1<<edge)))}))})),repairs=repairMasks.map(x=>({removed:ids(x),kept:ids(full^x),schedule:schedule(n,subset(full^x)),restorations:ids(x).map(edge=>({edge,cycle:cycle((full^x)|(1<<edge))}))})),minimum_removals=Math.min(...repairs.map(r=>r.removed.length));
+return {schema:'stnlab-conflicts-v1',input,consistent:feasible[full],feasible,conflicts,repairs,minimum_removals,minimum_repairs:repairs.filter(r=>r.removed.length===minimum_removals).map(r=>r.removed),unavoidable:ids(full).filter(i=>repairs.every(r=>r.removed.includes(i))),hits:repairMasks.map(x=>cores.map(y=>ids(x&y)[0]))};}

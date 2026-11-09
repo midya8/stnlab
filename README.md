@@ -71,3 +71,10 @@ python -m stnlab.projection projection.json --verify
 ```
 
 Twelve synthetic controls, independent permutation/edge-product replay, a separate Fourier-Motzkin elimination audit and recursive browser recomputation. Retained IDs are preserved, including t0=0; negative real times are allowed. Projected edges/witnesses can exceed the bounded public input windows. This is classical existential projection, not point deletion, task execution or a new algorithm. The original and insertion inspectors remain intact.
+
+
+## Complete conflicts and repairs
+
+[All-conflict inspector](https://midya8.github.io/stnlab/conflicts.html) | [Contract and source ledger](CONFLICTS.md)
+
+Inspect every inclusion-minimal inconsistent edge set and every inclusion-minimal correction set. Full conflict-deletion schedules prove minimality; restoration cycles prove every proposed removal is needed. Complete subset feasibility, minimum-cardinality ties and both directions of hitting-set duality are independently audited. Ten original controls include unequal-size minimal repairs, disconnected conflicts, duplicate edges, zero cycles and a 12-edge complete directed network. Classical bounded temporal diagnosis, not a new algorithm or real execution.
