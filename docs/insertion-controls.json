@@ -1,0 +1,386 @@
+[
+  {
+    "name": "Tightening one edge changes distant bounds",
+    "note": "The new t2-t1 <= 2 tightens both t2-t1 and t2-t0. Inspect the single-edge route and an attaining assignment.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            2,
+            12
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            -2
+          ]
+        ]
+      },
+      "candidate": [
+        1,
+        2,
+        2
+      ]
+    }
+  },
+  {
+    "name": "The exact boundary remains feasible",
+    "note": "At the minimum feasible weight a zero cycle appears, not a contradiction.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            2,
+            12
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            -2
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        2,
+        3
+      ]
+    }
+  },
+  {
+    "name": "One below the boundary closes a negative cycle",
+    "note": "The old return path and new edge sum to a negative weight.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            2,
+            12
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            -2
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        2,
+        2
+      ]
+    }
+  },
+  {
+    "name": "A redundant addition changes no bound",
+    "note": "A new bound of 8 repeats a consequence already bounded by 7.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            2,
+            12
+          ],
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            -2
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        2,
+        8
+      ]
+    }
+  },
+  {
+    "name": "No return path means no finite lower threshold",
+    "note": "Connecting two components can create finite bounds without risking a new cycle, at any real candidate weight.",
+    "input": {
+      "base": {
+        "nodes": 4,
+        "edges": [
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            3,
+            5
+          ],
+          [
+            3,
+            2,
+            -2
+          ]
+        ]
+      },
+      "candidate": [
+        1,
+        2,
+        -3
+      ]
+    }
+  },
+  {
+    "name": "Adding a rule cannot fix an existing conflict",
+    "note": "The isolated-anchor negative cycle stays impossible; no threshold or matrix is reported.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            1,
+            2,
+            -2
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        1,
+        20
+      ]
+    }
+  },
+  {
+    "name": "A self-loop has boundary zero",
+    "note": "The return path is empty. Any negative self-loop fails; zero and positive self-loops are redundant.",
+    "input": {
+      "base": {
+        "nodes": 1,
+        "edges": []
+      },
+      "candidate": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "An extra duplicate is redundant",
+    "note": "The old constraint already implies the candidate. No matrix entry changes.",
+    "input": {
+      "base": {
+        "nodes": 2,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            0,
+            1,
+            4
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        1,
+        4
+      ]
+    }
+  },
+  {
+    "name": "Six points: finite threshold outside the input window",
+    "note": "The return chain weighs 100, so the global lower threshold is -100. Boundary certificates are internal witnesses and may exceed input limits.",
+    "input": {
+      "base": {
+        "nodes": 6,
+        "edges": [
+          [
+            0,
+            1,
+            20
+          ],
+          [
+            1,
+            2,
+            20
+          ],
+          [
+            2,
+            3,
+            20
+          ],
+          [
+            3,
+            4,
+            20
+          ],
+          [
+            4,
+            5,
+            20
+          ]
+        ]
+      },
+      "candidate": [
+        5,
+        0,
+        -20
+      ]
+    }
+  },
+  {
+    "name": "Six points and twelve original edges",
+    "note": "The candidate is a thirteenth edge; only the base is capped at twelve. Original indices remain unchanged.",
+    "input": {
+      "base": {
+        "nodes": 6,
+        "edges": [
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            -2
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            3,
+            4,
+            -1
+          ],
+          [
+            4,
+            5,
+            2
+          ],
+          [
+            5,
+            0,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            4,
+            3,
+            2
+          ],
+          [
+            5,
+            4,
+            0
+          ],
+          [
+            0,
+            5,
+            -1
+          ]
+        ]
+      },
+      "candidate": [
+        0,
+        5,
+        -2
+      ]
+    }
+  }
+]

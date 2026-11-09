@@ -40,3 +40,20 @@ Nine native tests include all 256 two-node graphs with loops and all 4096 three-
 ## Boundaries before interpretation
 
 At most six time points, 12 directed edges, integer input weights -20..20. Times are real-valued; integer certificates suffice for these integer constraints. Native Floyd-Warshall closure and synchronous Bellman-Ford schedules; independent permutation/edge-product verifier and recursive browser search. Enumeration is deliberately tiny, not a production scaling claim. No uncertain durations, resource capacity, disjunctions, dispatchability, objective optimization, real calendar actions, learned model, paid API or new algorithm. Individually attainable bounds do not make every combination of their endpoints feasible. Individually redundant duplicates cannot safely be deleted together. MIT license.
+
+
+## One proposed edge, every changed consequence
+
+[Insertion inspector](https://midya8.github.io/stnlab/insertions.html) · [Insertion contract and source ledger](INSERTIONS.md)
+
+Add one proposed [u,v,w] constraint to a fixed base. Its exact feasible threshold is -D[v,u], or no finite lower threshold when the return path is absent. The boundary has a full feasible schedule; one below it has a negative-cycle certificate. A redundant proposal changes no matrix entry. Otherwise inspect every old/new bound, old left and right routes through the candidate, canonical post-insertion path, attaining schedule or unbounded ray. A 41-weight integer sweep shows the consistency/tightening/redundancy regions and exact changed-cell counts.
+
+Native generation computes closure once and updates each distance from the immutable old matrix. Independent full permutation/edge-product recomputation checks every sampled weight and witness; the browser independently recomputes with recursive paths. Ten original controls include a -100 threshold outside the input window, an inconsistent base and thirteen total edges. The original core, independent oracle, browser engine and original test sources remain unchanged.
+
+```bash
+python -m stnlab.insertions proposal.json --output insertion-report.json
+python -m stnlab.insertions insertion-report.json --verify
+# After installation: stnlab-insertions proposal.json
+```
+
+One candidate at a time, not accumulated insertions or a fully dynamic planner. The distance update is O(n²), not the exhaustive certificate generation/checker. See INSERTIONS.md for exact source distinctions and independently counted test evidence.
