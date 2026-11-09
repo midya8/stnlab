@@ -2,6 +2,6 @@
   "name": "stnlab",
   "private": true,
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs tests/test_insertions.mjs tests/test_insertions_browser.cjs tests/test_projection.mjs tests/test_projection_browser.cjs"
+    "test": "node --test --test-concurrency=1 tests/test_engine.mjs tests/test_browser.cjs tests/test_insertions.mjs tests/test_insertions_browser.cjs tests/test_projection.mjs tests/test_projection_browser.cjs tests/test_conflicts.mjs tests/test_conflicts_browser.cjs"
   }
 }
