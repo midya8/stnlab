@@ -9,5 +9,6 @@ requires-python = ">=3.10"
 license = {text = "MIT"}
 [project.scripts]
 stnlab = "stnlab.__main__:main"
+stnlab-insertions = "stnlab.insertions:main"
 [tool.setuptools]
 packages = ["stnlab"]
