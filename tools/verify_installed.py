@@ -20,3 +20,14 @@ for k,c in enumerate(controls):
   out=f'insertion-report-{k}-{j}.json';subprocess.run(command+[str(inp),'--output',out],check=True);assert json.load(open(out))==expected
   q=subprocess.run(command+[out,'--verify'],check=True,capture_output=True,text=True);assert json.loads(q.stdout)=={'valid':True,'schema':'stnlab-insertions-v1'}
 print(f'Installed insertion family: {len(controls)} controls, both CLI entry points generation/verification, four total site-packages origins, outside checkout')
+
+import stnlab.projection
+assert 'site-packages' in stnlab.projection.__file__
+controls=json.load(open(sys.argv[5]));commands=[[sys.executable,'-m','stnlab.projection'],[sys.argv[6]]]
+for k,c in enumerate(controls):
+ inp=pathlib.Path(f'projection-input-{k}.json');inp.write_text(json.dumps(c['input']))
+ expected=stnlab.projection.analyze(c['input']);assert stnlab.projection.verify(expected)
+ for j,command in enumerate(commands):
+  out=f'projection-report-{k}-{j}.json';subprocess.run(command+[str(inp),'--output',out],check=True);assert json.load(open(out))==expected
+  q=subprocess.run(command+[out,'--verify'],check=True,capture_output=True,text=True);assert json.loads(q.stdout)=={'valid':True,'schema':'stnlab-projection-v1'}
+print(f'Installed projection family: {len(controls)} controls, both CLI entry points, five total site-packages origins, outside checkout')

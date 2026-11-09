@@ -10,5 +10,6 @@ license = {text = "MIT"}
 [project.scripts]
 stnlab = "stnlab.__main__:main"
 stnlab-insertions = "stnlab.insertions:main"
+stnlab-projection = "stnlab.projection:main"
 [tool.setuptools]
 packages = ["stnlab"]

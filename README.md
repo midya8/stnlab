@@ -57,3 +57,17 @@ python -m stnlab.insertions insertion-report.json --verify
 ```
 
 One candidate at a time, not accumulated insertions or a fully dynamic planner. The distance update is O(n²), not the exhaustive certificate generation/checker. See INSERTIONS.md for exact source distinctions and independently counted test evidence.
+
+## Existential projection
+
+[Projection inspector](https://midya8.github.io/stnlab/projection.html) · [Exact contract and six-source ledger](PROJECTION.md)
+
+Hide time points without losing constraints implied through them. Compare exact closure restriction with naive edge deletion, test a retained assignment, and inspect a full original-network extension or an original path proving it impossible. Every finite projected difference has a complete attaining schedule; missing paths have anchored unbounded rays. Naive-deletion counterexamples show the lost consequences explicitly. An inconsistent hidden component still makes projection empty.
+
+```sh
+python -m stnlab.projection input.json --output projection.json
+python -m stnlab.projection projection.json --verify
+# or, after installation: stnlab-projection input.json
+```
+
+Twelve synthetic controls, independent permutation/edge-product replay, a separate Fourier-Motzkin elimination audit and recursive browser recomputation. Retained IDs are preserved, including t0=0; negative real times are allowed. Projected edges/witnesses can exceed the bounded public input windows. This is classical existential projection, not point deletion, task execution or a new algorithm. The original and insertion inspectors remain intact.

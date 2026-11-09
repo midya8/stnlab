@@ -1,0 +1,436 @@
+[
+  {
+    "name": "A hidden point still constrains the endpoints",
+    "description": "Deleting t1 would allow t2=8, but the hidden chain proves t2-t0 <= 7. The selected assignment t2=7 extends exactly.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            2,
+            12
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        2
+      ],
+      "values": [
+        0,
+        7
+      ]
+    }
+  },
+  {
+    "name": "A naive-valid assignment has no extension",
+    "description": "The induced graph allows t2=8. The full path through hidden t1 rejects it with a negative pinned cycle.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            2,
+            12
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        2
+      ],
+      "values": [
+        0,
+        8
+      ]
+    }
+  },
+  {
+    "name": "Two retained values each look legal",
+    "description": "Each point is individually within 0..4, but hidden t3 forces t2 <= t1. Values t1=0,t2=4 cannot coexist.",
+    "input": {
+      "base": {
+        "nodes": 4,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            1,
+            3,
+            1
+          ],
+          [
+            3,
+            2,
+            -1
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        1,
+        2
+      ],
+      "values": [
+        0,
+        0,
+        4
+      ]
+    }
+  },
+  {
+    "name": "A hidden conflict cannot be deleted",
+    "description": "The retained anchor has no incident edges, but a hidden negative cycle makes the entire existential projection empty.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            1,
+            2,
+            -2
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      },
+      "keep": [
+        0
+      ],
+      "values": [
+        0
+      ]
+    }
+  },
+  {
+    "name": "Only the anchor remains",
+    "description": "A consistent hidden chain imposes no extra constraint on the fixed anchor; a full extension still exists.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "keep": [
+        0
+      ],
+      "values": [
+        0
+      ]
+    }
+  },
+  {
+    "name": "Keep every point",
+    "description": "With nothing hidden, closure and induced closure agree, and the selected assignment extends as itself.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            1,
+            4
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        1,
+        2
+      ],
+      "values": [
+        0,
+        4,
+        7
+      ]
+    }
+  },
+  {
+    "name": "Disconnected retained freedom",
+    "description": "Missing directed paths remain unbounded, and independent retained values extend.",
+    "input": {
+      "base": {
+        "nodes": 4,
+        "edges": [
+          [
+            1,
+            2,
+            2
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        1,
+        3
+      ],
+      "values": [
+        0,
+        -10,
+        12
+      ]
+    }
+  },
+  {
+    "name": "A zero cycle and duplicate path",
+    "description": "Repeated edges and a zero cycle do not create inconsistency or distinct projected variables.",
+    "input": {
+      "base": {
+        "nodes": 3,
+        "edges": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            1,
+            2,
+            -1
+          ],
+          [
+            2,
+            1,
+            1
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        2
+      ],
+      "values": [
+        0,
+        1
+      ]
+    }
+  },
+  {
+    "name": "Six-point long hidden chain",
+    "description": "Five edges imply a retained bound of 100, beyond the public edge-weight window. Internal projected bounds are not clipped.",
+    "input": {
+      "base": {
+        "nodes": 6,
+        "edges": [
+          [
+            0,
+            1,
+            20
+          ],
+          [
+            1,
+            2,
+            20
+          ],
+          [
+            2,
+            3,
+            20
+          ],
+          [
+            3,
+            4,
+            20
+          ],
+          [
+            4,
+            5,
+            20
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        5
+      ],
+      "values": [
+        0,
+        100
+      ]
+    }
+  },
+  {
+    "name": "Twelve-edge base",
+    "description": "Keep three points in a six-point network with twelve original constraints; all lift slacks remain explicit.",
+    "input": {
+      "base": {
+        "nodes": 6,
+        "edges": [
+          [
+            0,
+            1,
+            3
+          ],
+          [
+            1,
+            2,
+            -2
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            3,
+            4,
+            -1
+          ],
+          [
+            4,
+            5,
+            2
+          ],
+          [
+            5,
+            0,
+            3
+          ],
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            2,
+            1,
+            3
+          ],
+          [
+            3,
+            2,
+            -2
+          ],
+          [
+            4,
+            3,
+            2
+          ],
+          [
+            5,
+            4,
+            0
+          ],
+          [
+            0,
+            5,
+            6
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        2,
+        5
+      ],
+      "values": [
+        0,
+        0,
+        2
+      ]
+    }
+  },
+  {
+    "name": "A single point",
+    "description": "The anchor-only network is a valid nonempty projection.",
+    "input": {
+      "base": {
+        "nodes": 1,
+        "edges": []
+      },
+      "keep": [
+        0
+      ],
+      "values": [
+        0
+      ]
+    }
+  },
+  {
+    "name": "Negative self-loop",
+    "description": "Even keeping every point cannot repair an impossible base.",
+    "input": {
+      "base": {
+        "nodes": 2,
+        "edges": [
+          [
+            1,
+            1,
+            -1
+          ]
+        ]
+      },
+      "keep": [
+        0,
+        1
+      ],
+      "values": [
+        0,
+        0
+      ]
+    }
+  }
+]
