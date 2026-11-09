@@ -1,0 +1,290 @@
+[
+  {
+    "name": "Shared edge, unequal repair sizes",
+    "description": "Two minimal conflicts share C0. Removing C0 is a one-edge repair; removing both C1 and C2 is also inclusion-minimal.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          1,
+          -2
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Disjoint conflicts",
+    "description": "One repair choice must hit each of two independent negative cycles.",
+    "input": {
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          2,
+          3,
+          0
+        ],
+        [
+          3,
+          2,
+          -1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "One negative self-loop",
+    "description": "The single impossible edge is unavoidable.",
+    "input": {
+      "nodes": 2,
+      "edges": [
+        [
+          1,
+          1,
+          -1
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Duplicate constraints",
+    "description": "Equal triples remain distinct original edge identities. Deleting only one duplicate may repair nothing.",
+    "input": {
+      "nodes": 2,
+      "edges": [
+        [
+          0,
+          1,
+          -2
+        ],
+        [
+          0,
+          1,
+          -2
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Zero cycle, no conflict",
+    "description": "Zero-weight cycles are feasible; no deletion is needed.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          -1
+        ],
+        [
+          2,
+          0,
+          -1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "No edges",
+    "description": "The only correction set is empty and there are no conflicts.",
+    "input": {
+      "nodes": 3,
+      "edges": []
+    }
+  },
+  {
+    "name": "Anchor alone",
+    "description": "One point with no constraints has the same empty-family conventions.",
+    "input": {
+      "nodes": 1,
+      "edges": []
+    }
+  },
+  {
+    "name": "Twelve-edge complete conflict",
+    "description": "Every ordered pair on four points has weight -1. Inspect all subset-minimal conflicts and all minimal repairs, not only one returned cycle.",
+    "input": {
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1,
+          -1
+        ],
+        [
+          0,
+          2,
+          -1
+        ],
+        [
+          0,
+          3,
+          -1
+        ],
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          1,
+          2,
+          -1
+        ],
+        [
+          1,
+          3,
+          -1
+        ],
+        [
+          2,
+          0,
+          -1
+        ],
+        [
+          2,
+          1,
+          -1
+        ],
+        [
+          2,
+          3,
+          -1
+        ],
+        [
+          3,
+          0,
+          -1
+        ],
+        [
+          3,
+          1,
+          -1
+        ],
+        [
+          3,
+          2,
+          -1
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Long cycle, irrelevant edges",
+    "description": "Six points form one negative cycle. Nonnegative self-loops do not enter a minimal conflict.",
+    "input": {
+      "nodes": 6,
+      "edges": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          2,
+          3,
+          0
+        ],
+        [
+          3,
+          4,
+          0
+        ],
+        [
+          4,
+          5,
+          0
+        ],
+        [
+          5,
+          0,
+          -1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          3,
+          2
+        ]
+      ]
+    }
+  },
+  {
+    "name": "Two unavoidable edges",
+    "description": "Independent negative self-loops must both be removed. Restoring either revives its own contradiction.",
+    "input": {
+      "nodes": 3,
+      "edges": [
+        [
+          1,
+          1,
+          -1
+        ],
+        [
+          2,
+          2,
+          -2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          2
+        ]
+      ]
+    }
+  }
+]
