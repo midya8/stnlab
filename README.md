@@ -1,6 +1,6 @@
 # STNLab
 
-**One more deadline. Still a possible plan?** Exact simple temporal networks for small AI plans. Each input edge `[u,v,w]` means `t[v] - t[u] <= w`. Inspect a strongest implied upper bound, a complete schedule attaining it, an unbounded translation ray, or a negative cycle proving no schedule exists.
+STNLab checks exact simple temporal networks for small supplied plans. Each input edge `[u,v,w]` means `t[v] - t[u] <= w`. Inspect a strongest implied upper bound, a complete schedule attaining it, an unbounded translation ray, or a negative cycle proving no schedule exists.
 
 [Interactive temporal inspector](https://midya8.github.io/stnlab/) · [Exact method and seven-source ledger](METHOD.md)
 
@@ -27,7 +27,19 @@ assert report['pairs'][2]['path'] == [1, 2]
 assert verify(report)
 ```
 
-## Every consequence has evidence
+The full current suite has 31 Python and 12 Node/actual-Chrome tests across all four inspectors. The original release counts below describe the base inspector.
+
+## Choose a question
+
+- **Original inspector:** is the network feasible, and what is the tightest bound on each time difference?
+- **Insertion:** what changes when one proposed constraint is added to a fixed base?
+- **Projection:** what constraints remain after existentially hiding selected time points?
+- **Conflicts and repairs:** which edge sets are minimally inconsistent, and which removals restore consistency?
+
+These operate on supplied constraint networks, not calendars. Projection is not
+edge deletion, and a minimal repair need not have minimum cardinality.
+
+## Bounds and witnesses
 
 - All ordered time differences: exact finite bound, original-index path and complete attaining schedule; or an anchored ray proving unboundedness.
 - Full directed bound matrix and complete base schedule. Times can be negative; `t0=0` removes only a common translation.
@@ -35,14 +47,14 @@ assert verify(report)
 - Negative-cycle inconsistency witness with every original inequality and the impossible summed inequality.
 - Eleven original synthetic controls: tighter chains, three-edge conflict, disconnected freedom/conflict, duplicate redundancy, zero cycles, negative self-loop, single anchor, six free points, 12-edge network and a length-five bound of 100.
 
-Nine native tests include all 256 two-node graphs with loops and all 4096 three-node directed graphs at absent/-1/0/1 edges, 100 seeded larger networks, independent bounded-integer checks, node/edge relabeling, strict forgeries and CLI errors. Three Node/Chrome tests include 367 complete cross-engine reports. Actual Chrome inspects every bound/ray/removal/cycle at 320/390/1280, exports, stale clearing and overflow. Installed-wheel controls reproduce outside checkout.
+The original nine native tests include all 256 two-node graphs with loops and all 4096 three-node directed graphs at absent/-1/0/1 edges, 100 seeded larger networks, independent bounded-integer checks, node/edge relabeling, strict forgeries and CLI errors. The original three Node/Chrome tests include 367 complete cross-engine reports. Actual Chrome inspects every bound/ray/removal/cycle at 320/390/1280, exports, stale clearing and overflow. Installed-wheel controls reproduce outside checkout.
 
-## Boundaries before interpretation
+## Scope and limits
 
 At most six time points, 12 directed edges, integer input weights -20..20. Times are real-valued; integer certificates suffice for these integer constraints. Native Floyd-Warshall closure and synchronous Bellman-Ford schedules; independent permutation/edge-product verifier and recursive browser search. Enumeration is deliberately tiny, not a production scaling claim. No uncertain durations, resource capacity, disjunctions, dispatchability, objective optimization, real calendar actions, learned model, paid API or new algorithm. Individually attainable bounds do not make every combination of their endpoints feasible. Individually redundant duplicates cannot safely be deleted together. MIT license.
 
 
-## One proposed edge, every changed consequence
+## Single-edge insertion
 
 [Insertion inspector](https://midya8.github.io/stnlab/insertions.html) · [Insertion contract and source ledger](INSERTIONS.md)
 
